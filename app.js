@@ -4,3 +4,49 @@ const ThemeButton = document.querySelector(".theme-changer");
 ThemeButton.addEventListener("click", () => {
   document.body.classList.toggle("dark");
 });
+
+// Todo add
+
+const todoInput = document
+  .querySelector(".todo-input")
+  .addEventListener("keypress", (e) => {
+    let valueEl = document.querySelector(".todo-input").value;
+    if (e.key === "Enter" && valueEl.length >= 1) {
+      createTodo(valueEl);
+      document.querySelector(".todo-input").value = "";
+    } else {
+      inputError();
+    }
+  });
+
+function createTodo(valueEl) {
+  const todoList = document.querySelector(".todo-list");
+  // create div
+  let list = document.createElement("div");
+  list.classList.add("list");
+  todoList.appendChild(list);
+  list.innerHTML = `<button class="todo-button">
+  <img src="/images/icon-check.svg" alt="" />
+</button>
+<h2 class="todo-activity">${valueEl}</h2>
+<button class="delete-list">
+  <img src="/images/icon-cross.svg" alt="" />
+</button>`;
+  const todoBtn = document.querySelectorAll(".todo-button");
+  completed(todoBtn);
+}
+
+function inputError() {
+  const inputEl = document.querySelector(".main-input");
+  inputEl.classList.add("error");
+}
+
+// Completed Todo
+
+function completed(todoBtn) {
+  todoBtn.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      btn.classList.toggle("completed");
+    });
+  });
+}
