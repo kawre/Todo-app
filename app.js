@@ -34,6 +34,7 @@ function createTodo(valueEl) {
 </button>`;
   completedBtn(list);
   deleteList(list);
+  itemsLeft(todoList);
 }
 // Completed
 
@@ -51,7 +52,8 @@ function deleteList(list) {
   let deleteBtn = list.children[2];
 
   deleteBtn.addEventListener("click", () => {
-    console.log(deleteBtn.parentElement.remove());
+    deleteBtn.parentElement.remove();
+    itemsLeft(list);
   });
 }
 
@@ -60,4 +62,13 @@ function deleteList(list) {
 function inputError() {
   const inputEl = document.querySelector(".main-input");
   inputEl.classList.add("error");
+}
+
+// Count list
+
+function itemsLeft(todoList) {
+  const itemsLeftEl = document.querySelector(".p-items-left");
+  let listNumb = todoList.childNodes.length;
+  console.log(listNumb);
+  itemsLeftEl.innerText = `${listNumb} items left`;
 }
