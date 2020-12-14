@@ -15,7 +15,7 @@ const todoInput = document
       createTodo(valueEl);
       document.querySelector(".todo-input").value = "";
     } else {
-      inputError();
+      // inputError();
     }
   });
 
@@ -32,21 +32,32 @@ function createTodo(valueEl) {
 <button class="delete-list">
   <img src="/images/icon-cross.svg" alt="" />
 </button>`;
-  const todoBtn = document.querySelectorAll(".todo-button");
-  completed(todoBtn);
+  completedBtn(list);
+  deleteList(list);
 }
+// Completed
+
+function completedBtn(list) {
+  let todoBtn = list.children[0];
+
+  todoBtn.addEventListener("click", () => {
+    todoBtn.classList.toggle("completed");
+  });
+}
+
+// Delete list
+
+function deleteList(list) {
+  let deleteBtn = list.children[2];
+
+  deleteBtn.addEventListener("click", () => {
+    console.log(deleteBtn.parentElement.remove());
+  });
+}
+
+// Error
 
 function inputError() {
   const inputEl = document.querySelector(".main-input");
   inputEl.classList.add("error");
-}
-
-// Completed Todo
-
-function completed(todoBtn) {
-  todoBtn.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      btn.classList.toggle("completed");
-    });
-  });
 }
