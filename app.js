@@ -27,14 +27,14 @@ function createTodo(valueEl) {
   todoList.appendChild(list);
   list.innerHTML = `<button class="todo-button">
   <img src="/images/icon-check.svg" alt="" />
-</button>
-<h2 class="todo-activity">${valueEl}</h2>
-<button class="delete-list">
+  </button>
+  <h2 class="todo-activity">${valueEl}</h2>
+  <button class="delete-list">
   <img src="/images/icon-cross.svg" alt="" />
-</button>`;
+  </button>`;
   completedBtn(list);
   deleteList(list);
-  itemsLeft(todoList);
+  itemsLeft();
 }
 // Completed
 
@@ -53,7 +53,7 @@ function deleteList(list) {
 
   deleteBtn.addEventListener("click", () => {
     deleteBtn.parentElement.remove();
-    itemsLeft(list);
+    itemsLeft();
   });
 }
 
@@ -66,9 +66,45 @@ function inputError() {
 
 // Count list
 
-function itemsLeft(todoList) {
+function itemsLeft() {
   const itemsLeftEl = document.querySelector(".p-items-left");
-  let listNumb = todoList.childNodes.length;
+  const listAll = document.querySelectorAll(".list");
+  let listNumb = listAll.length;
   console.log(listNumb);
   itemsLeftEl.innerText = `${listNumb} items left`;
+  const mainOutput = document.querySelector(".main-output");
+  if (listNumb === 0) {
+    mainOutput.classList.add("hide");
+  } else {
+    mainOutput.classList.remove("hide");
+  }
 }
+
+// clear completed
+
+const clearBtn = document
+  .querySelector(".btn-clear")
+  .addEventListener("click", () => {
+    const all = document.querySelectorAll(".list");
+    all.forEach((list) => {
+      const listBtn = list.children[0];
+      if (listBtn.classList.contains("completed")) {
+        console.log(listBtn.parentNode.remove());
+      } else {
+        console.log("chuj");
+      }
+    });
+    itemsLeft();
+  });
+
+// Control buttons
+
+const controlBtns = document.querySelectorAll(".c-btn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    if (btn.classList.contains("active")) {
+      console.log("elo");
+    } else {
+      btn.classList.add("active");
+    }
+  });
+});

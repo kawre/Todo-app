@@ -108,8 +108,11 @@ main {
 
 .drag-drop {
   color: hsl(233, 11%, 84%);
-  text-align: center;
+  position: absolute;
   margin-top: 50px;
+  left: 0;
+  right: 0;
+  text-align: center;
 }
 
 .main-output {
@@ -223,7 +226,15 @@ main {
   border: none;
   cursor: pointer;
   font-size: 16px;
+  color: hsl(236, 9%, 61%);
+}
+
+.c-btn:hover {
   color: hsl(235, 19%, 35%);
+}
+
+.c-btn.active:hover {
+  color: hsl(220, 98%, 61%);
 }
 
 .btn-clear {
@@ -234,6 +245,10 @@ main {
   color: hsl(236, 9%, 61%);
 }
 
+.btn-clear:hover {
+  color: hsl(235, 19%, 35%);
+}
+
 .controls {
   display: flex;
   gap: 10px;
@@ -242,4 +257,12 @@ main {
 
 .p-items-left {
   width: 107.083px;
+}
+
+.hide {
+  visibility: hidden;
+}
+
+.active {
+  color: hsl(220, 98%, 61%);
 }
