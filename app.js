@@ -99,12 +99,13 @@ const clearBtn = document
 
 // Control buttons
 
-const controlBtns = document.querySelectorAll(".c-btn").forEach((btn) => {
+const controlBtns = document.querySelectorAll(".c-btn");
+
+controlBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
-    if (btn.classList.contains("active")) {
-      console.log("elo");
-    } else {
-      btn.classList.add("active");
-    }
+    controlBtns.forEach((btnEl) => {
+      btnEl.classList.remove("active");
+    });
+    btn.classList.add("active");
   });
 });
