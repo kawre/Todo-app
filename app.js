@@ -32,9 +32,12 @@ function createTodo(valueEl) {
   <button class="delete-list">
   <img src="/images/icon-cross.svg" alt="" />
   </button>`;
+
+  // functions
   completedBtn(list);
   deleteList(list);
   itemsLeft();
+  dragAndDrop(list);
 }
 // Completed
 
@@ -90,8 +93,6 @@ const clearBtn = document
       const listBtn = list.children[0];
       if (listBtn.classList.contains("completed")) {
         console.log(listBtn.parentNode.remove());
-      } else {
-        console.log("chuj");
       }
     });
     itemsLeft();
@@ -102,10 +103,45 @@ const clearBtn = document
 const controlBtns = document.querySelectorAll(".c-btn");
 
 controlBtns.forEach((btn) => {
-  btn.addEventListener("click", () => {
+  btn.addEventListener("click", (e) => {
     controlBtns.forEach((btnEl) => {
       btnEl.classList.remove("active");
     });
     btn.classList.add("active");
+    let btnText = btn.innerText.toLowerCase();
+
+    // Search thru
+    const allList = document.querySelectorAll(".list");
+    if (btnText == "completed") {
+      for (i = 0; i < allList.length; i++) {
+        if (allList[i].children[0].classList.contains("completed")) {
+          allList[i].classList.remove("none");
+        } else {
+          allList[i].classList.add("none");
+        }
+      }
+    }
+    if (btnText == "all") {
+      for (i = 0; i < allList.length; i++) {
+        allList[i].classList.remove("none");
+      }
+    }
+    if (btnText == "active") {
+      for (i = 0; i < allList.length; i++) {
+        if (allList[i].children[0].classList.contains("completed")) {
+          allList[i].classList.add("none");
+        } else {
+          allList[i].classList.remove("none");
+        }
+      }
+    }
   });
 });
+
+// Drag and drop
+
+function dragAndDrop(list) {
+  list.addEventListener("dragstart", () => {
+    console.log("elo");
+  });
+}

@@ -263,6 +263,10 @@ main {
   visibility: hidden;
 }
 
+.none {
+  display: none;
+}
+
 .active {
   color: hsl(220, 98%, 61%);
 }
